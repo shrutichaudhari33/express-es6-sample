@@ -1,14 +1,24 @@
 version: 0.2
 
+env:
+  variables:
+    NODE_ENV: "production"
+
 phases:
   install:
+    runtime-versions:
+      nodejs: 18
     commands:
-      - echo "Installing dependencies..."
-      - cd src || true
+      - echo "Current directory: $(pwd)"
+      - echo "Listing contents before moving:"
+      - ls -la
+      - cd src || echo "No src folder, continuing..."
+      - echo "Now in directory: $(pwd)"
+      - ls -la
       - npm install
   build:
     commands:
-      - echo "Building application..."
+      - echo "Running build phase..."
       - npm run build || echo "No build script found"
 artifacts:
   files:
